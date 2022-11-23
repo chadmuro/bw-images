@@ -9,9 +9,9 @@ import {
   faTruckFast,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { ImageCard } from "./types";
+import { ImageCardType } from "./types";
 
-export const images: ImageCard[] = [
+export const images: ImageCardType[] = [
   { id: 1, icon: faPoo, name: "Poo" },
   { id: 2, icon: faMusic, name: "Music" },
   { id: 3, icon: faUser, name: "User" },
