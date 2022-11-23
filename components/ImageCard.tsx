@@ -13,7 +13,7 @@ export default function Image({ image, handleImageClick }: Props) {
       onClick={() => handleImageClick(image)}
     >
       <div className="w-full h-full p-4 sm:p-8 border border-gray-600 rounded-lg flex justify-center items-center">
-        <FontAwesomeIcon icon={image.icon} className="h-full w-full" />
+        <FontAwesomeIcon icon={image.icon} className="h-full max-w-full" />
       </div>
       <p className="text-center mt-1">{image.name}</p>
     </div>

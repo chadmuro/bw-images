@@ -3,6 +3,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "next-themes";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 import { ImageCardType } from "../types";
 
 interface Props {
@@ -12,8 +14,42 @@ interface Props {
 }
 
 export default function Modal({ open, setOpen, selectedImage }: Props) {
+  const iconRef = useRef<any>(null);
   const closeButtonRef = useRef(null);
   const { theme, setTheme } = useTheme();
+
+  const handlePngDownload = async () => {
+    const element = iconRef.current;
+    const canvas = await html2canvas(element);
+
+    const data = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+
+    if (typeof link.download === "string") {
+      link.href = data;
+      link.download = `${selectedImage?.name}.png`;
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      window.open(data);
+    }
+  };
+
+  const handlePdfDownload = async () => {
+    const element = iconRef.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`${selectedImage?.name}.pdf`);
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -77,15 +113,22 @@ export default function Modal({ open, setOpen, selectedImage }: Props) {
                       </Dialog.Title>
                       {selectedImage && (
                         <>
-                          <div className="w-full h-auto p-4 sm:p-8 border border-gray-600 rounded-lg flex justify-center items-center">
+                          <div
+                            ref={iconRef}
+                            className="bg-white dark:bg-black text-black dark:text-white w-full h-auto p-4 sm:p-8 border border-gray-600 rounded-lg flex justify-center items-center"
+                          >
                             <FontAwesomeIcon
                               icon={selectedImage.icon}
                               className="h-auto w-full"
                             />
                           </div>
                           <div className="flex gap-4">
-                            <button>Download PDF</button>
-                            <button>Download PNG</button>
+                            <button onClick={handlePdfDownload}>
+                              Download PDF
+                            </button>
+                            <button onClick={handlePngDownload}>
+                              Download PNG
+                            </button>
                           </div>
                         </>
                       )}
