@@ -83,12 +83,12 @@ export default function Modal({ open, setOpen, selectedImage }: Props) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-white dark:bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="bg-white dark:bg-black px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 flex justify-between items-center"
+                        className="text-xl font-medium leading-6 flex justify-between items-center mb-4"
                       >
                         {selectedImage?.name}
                         <button
@@ -122,7 +122,7 @@ export default function Modal({ open, setOpen, selectedImage }: Props) {
                               className="h-auto w-full"
                             />
                           </div>
-                          <div className="flex gap-4">
+                          <div className="flex gap-4 mt-2">
                             <button onClick={handlePdfDownload}>
                               Download PDF
                             </button>
@@ -132,14 +132,6 @@ export default function Modal({ open, setOpen, selectedImage }: Props) {
                           </div>
                         </>
                       )}
-
-                      {/* <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          Are you sure you want to deactivate your account? All
-                          of your data will be permanently removed. This action
-                          cannot be undone.
-                        </p>
-                      </div> */}
                     </div>
                   </div>
                 </div>
