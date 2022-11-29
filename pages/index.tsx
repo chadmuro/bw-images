@@ -38,7 +38,7 @@ export default function Home() {
       </Head>
 
       <header className="w-full h-16 flex justify-between items-center">
-        <h1 className="text-lg">Black and White images</h1>
+        <h1 className="text-lg">Black and White Images</h1>
 
         <button
           className="w-12 h-12 rounded-lg :bg-slate-800 flex items-center justify-center hover:ring-2 ring-yellow-400 transition-all duration-300 focus:outline-none p-2"
