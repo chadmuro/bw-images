@@ -17,13 +17,13 @@ import {
   faHeadphones,
   faBook,
   faDroplet,
-  faPlane,
   faVideo,
   faHand,
   faMoneyBill,
   faLemon,
   faBicycle,
   faTree,
+  faPlane,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { ImageCardType } from "./types";
